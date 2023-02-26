@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django.contrib.gis',
     'core',
 ]
 
@@ -85,7 +86,7 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pc',
+        'NAME': 'new_pc',
         'USER': 'admin',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
