@@ -1,4 +1,7 @@
 from __future__ import annotations
+from .managers import CustomUserManager
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 import uuid
 from django.db import models
 
@@ -115,15 +118,15 @@ class Location(models.Model):
 
 class Laboratory(models.Model):
     upin = models.CharField(
-        max_length=255, default=str(uuid.uuid4), unique=True)
+        max_length=255, default=uuid.uuid4, unique=True)
     name = models.CharField(max_length=255, verbose_name='Name')
     address = models.ForeignKey(
         "core.Location", on_delete=models.CASCADE, null=True)
-    admin_id = models.ForeignKey(
-        'core.Pathologist',
-        related_name='laboratory_admin',
-        on_delete=models.PROTECT,
-    )
+    # admin_id = models.ForeignKey(
+    #     'core.Pathologist',
+    #     related_name='laboratory_admin',
+    #     on_delete=models.PROTECT,
+    # )
     pathologists = models.ManyToManyField(
         'core.Pathologist',
         blank=True,
@@ -169,5 +172,17 @@ class Pathologist(models.Model):
         return full_name
 
 
-# solve the foreign key problems for pathologist and lab
-# chicken egg
+# class CustomUser(AbstractUser):
+#     username = None
+#     email = models.EmailField(_("email address"), unique=True)
+
+#     USERNAME_FIELD = "email"
+#     REQUIRED_FIELDS = []
+
+#     objects = CustomUserManager()
+
+#     def __str__(self):
+#         return self.email
+
+    # solve the foreign key problems for pathologist and lab
+    # chicken egg
