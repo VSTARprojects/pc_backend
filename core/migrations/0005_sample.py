@@ -16,12 +16,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sample',
             fields=[
-                ('id', models.BigAutoField(auto_created=True,
-                 primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_collected', models.DateTimeField(
-                    blank=True, null=True, verbose_name='Date of collection')),
-                ('pid', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT,
-                 related_name='patient', to='core.patient')),
+                (
+                    'id', models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True, serialize=False, verbose_name='ID',
+                    ),
+                ),
+                (
+                    'date_collected', models.DateTimeField(
+                        blank=True, null=True, verbose_name='Date of collection',
+                    ),
+                ),
+                (
+                    'pid', models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name='patient', to='core.patient',
+                    ),
+                ),
             ],
         ),
     ]

@@ -40,8 +40,6 @@ class Sample(models.Model):
         on_delete=models.PROTECT,
     )
     date_collected = models.DateTimeField(
-        verbose_name='Date of collection', blank=True, null=True,
-    )
+        verbose_name='Date of collection', blank=True, null=True)
     diagnosis_code = models.CharField(
-        max_length=8, blank=True, null=True, verbose_name='Diagnosis Code',
-    )
+        max_length=8, blank=True, null=True, verbose_name='Diagnosis Code')

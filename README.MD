@@ -3,5 +3,3 @@ sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contr
 
 python3 -m venv venv
 pip install -r requirements.txt
-
-pre-commit install
