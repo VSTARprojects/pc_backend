@@ -13,7 +13,7 @@ class Patient(models.Model):
         (NOT_SAY, "Rather not say"),
     )
 
-    first_name = models.CharField(max_length=255, null=True, verbose_name="First Name")
+    first_name = models.CharField(max_length=255, verbose_name="First Name")
     last_name = models.CharField(
         max_length=255, null=True, blank=True, verbose_name="Last Name"
     )
@@ -21,6 +21,8 @@ class Patient(models.Model):
         max_length=1, blank=True, null=True, verbose_name="Sex", choices=SEX_CHOICES
     )
     dob = models.DateField(verbose_name="Date of birth", blank=True, null=True)
+    phone_number = models.CharField(max_length=15, default="9393938345")
+
 
     def __str__(self):
         first_name = self.first_name or ""
