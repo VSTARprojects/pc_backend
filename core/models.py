@@ -130,7 +130,6 @@ class Laboratory(models.Model):
     pathologists = models.ManyToManyField(
         'core.Pathologist',
         blank=True,
-        null=True,
         related_name='laboratory_pathologists'
     )
 
@@ -172,17 +171,42 @@ class Pathologist(models.Model):
         return full_name
 
 
-# class CustomUser(AbstractUser):
-#     username = None
-#     email = models.EmailField(_("email address"), unique=True)
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(_("email address"), unique=True)
 
-#     USERNAME_FIELD = "email"
-#     REQUIRED_FIELDS = []
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
-#     objects = CustomUserManager()
+    objects = CustomUserManager()
 
-#     def __str__(self):
-#         return self.email
+    first_name = models.CharField(max_length=255, verbose_name='First Name')
+    last_name = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name='Last Name',
+    )
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
+
+    laboratory = models.ForeignKey(
+        'core.Laboratory',
+        related_name='user_laboratory',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
+    patients = models.ManyToManyField(
+        'core.Patient',
+        blank=True,
+        related_name='user_patients'
+    )
+
+    def __str__(self):
+        return self.email
+
+    def get_full_name(self):
+        first_name = self.first_name or ''
+        last_name = self.last_name or ''
+        full_name = f'{first_name} {last_name}'.strip()
+        return full_name
 
     # solve the foreign key problems for pathologist and lab
     # chicken egg
