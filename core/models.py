@@ -6,7 +6,7 @@ class Patient(models.Model):
     OTHER = "O"
     NOT_SAY = "N"
 
-    SEXES = (
+    SEX_CHOICES = (
         (MALE, "Male"),
         (FEMALE, "Female"),
         (OTHER, "Other"),
@@ -18,15 +18,12 @@ class Patient(models.Model):
         max_length=255, null=True, blank=True, verbose_name="Last Name"
     )
     sex = models.CharField(
-        max_length=1, blank=True, null=True, verbose_name="Sex", choices=SEXES
+        max_length=1, blank=True, null=True, verbose_name="Sex", choices=SEX_CHOICES
     )
     dob = models.DateField(verbose_name="Date of birth", blank=True, null=True)
 
     def __str__(self):
-        try:
-            first_name = self.first_name or ""
-            last_name = self.last_name or ""
-            full_name = f"{first_name} {last_name}".strip()
-        except:
-            full_name = 'Not Specified'
+        first_name = self.first_name or ""
+        last_name = self.last_name or ""
+        full_name = f"{first_name} {last_name}".strip()
         return full_name or None
